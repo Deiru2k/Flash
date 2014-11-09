@@ -19,7 +19,8 @@ angular
     'restangular',
     'naif.base64'
   ])
-  .config ($urlRouterProvider, $stateProvider, RestangularProvider) ->
+  .config ($urlRouterProvider, $stateProvider, $locationProvider, RestangularProvider) ->
+    $locationProvider.html5mode(true)
     RestangularProvider.setBaseUrl('http://localhost:8080/v1/')
     $urlRouterProvider.otherwise('/b/')
     $stateProvider
