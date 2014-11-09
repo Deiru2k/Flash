@@ -2,6 +2,7 @@ Flash
 =====
 Frontent part of Mikotoboard imageboard script.
 
+Make sure you have installed [backend](http://github.com/Mikotoboard/Lightning) before proceeding here
 
 To install:
 * Check this repo out on your server
