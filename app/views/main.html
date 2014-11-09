@@ -1,0 +1,15 @@
+<div class="row" style="height: 100%">
+    <div class="col-md-2 hidden-sm hidden-xs side-nav" ng-show="boards.length > 1" ng-controller="BoardNavCtrl">
+        <h3>Mikotoboard</h3>
+        <ul class="nav nav-pills nav-stacked side-nav-list" role="tablist">
+            <li ng-repeat="board in boards" ui-sref-active="active" role="presentation">
+                <a ui-sref="main.board({'board': board.id})">
+                    /{{board.id}}/ - {{board.description}}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-10 content" ui-view>
+        <h1 class="board-title">Какой-то контент</h1>
+    </div>
+</div>

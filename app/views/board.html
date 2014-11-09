@@ -1,0 +1,112 @@
+<h1 class="board-title">/{{board.id}}/ - {{board.description}}</h1>
+<hr>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <form class="form-horizontal" role="form">
+            <h3 class="board-title">New Thread</h3>
+            <div class="alert alert-danger" role="alert" ng-show="error">
+                {{error.message}}
+                <button type="button" class="close" ng-click="error = null"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="form-group">
+                <label for="newThreadTitle" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" ng-model="newThread.title" class="form-control" id="newThreadTitle" placeholder="Title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newThreadEmail" class="col-sm-2 control-label">E-Mail</label>
+                <div class="col-sm-10">
+                    <input type="email" ng-model="newThread.email" class="form-control" id="newThreadEmail" placeholder="E-Mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newThreadBody" class="col-sm-2 control-label">Message</label>
+                <div class="col-sm-10">
+                    <textarea rows="4" ng-model="newThread.body" class="form-control" id="newThreadBody" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newThreadImage" class="col-sm-2 control-label">Image</label>
+                <div class="col-sm-10">
+                    <input id="newThreadImage" type="file" ng-model="newThread.image" base-sixty-four-input>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="postNewThread(newThread)" type="button">Post new thread</button>
+                        </span>
+                        <input type="password" ng-model="newThread.password" placeholder="Thread password" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr>
+<div class="row" ng-repeat="thread in threads | orderBy:'createdAt.epoch_time':false">
+    <div class="col-md-10 col-md-offset-1 well well-sm">
+        <h4>
+            <a ui-sref="main.thread({'board': board.id, 'thread': thread.id})" class="thread-link">
+                {{thread.title}}
+                <span ng-show="!thread.title">Перейти в тред</span>
+            </a>
+            <a href="mailto:{{thread.email}}" ng-show="thread.email">by {{thread.email}}</a>
+            <small>
+                <i class="glyphicon glyphicon-time"></i> {{thread.createdAt.epoch_time * 1000 | date:'dd.MM.yyyy HH:mm'}}
+                <span class="pull-right">#{{thread.id}}</span>
+            </small>
+        </h4>
+        <hr>
+        <div class="row thread-content">
+            <div class="col-sm-3" ng-show="thread.image">
+                <a href="http://localhost:8080/v1/{{thread.image.url}}" target="_blank">
+                    <img class="post-img img-rounded img-responsive" ng-src="http://localhost:8080/v1/{{thread.image.url}}-thumb">
+                </a>
+            </div>
+            <div class="col-sm-9">
+                <p class="thread-body">{{thread.body}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="input-group">
+                        <span class="input-group-btn">
+                            <button ng-click="deleteThread(thread)" class="btn btn-default" ng-click="replyToThread(reply)" type="button"><i class="glyphicon glyphicon-trash"></i></button>
+                        </span>
+                    <input type="password" ng-model="thread.password" placeholder="Thread password" class="form-control">
+                </div>
+            </div>
+        </div>
+        <hr ng-show="thread.posts">
+        <div class="row" ng-repeat="post in thread.posts | orderBy:'createdAt.epoch_time':false" ng-show="thread.posts">
+            <div class="col-md-12">
+                <div class="panel panel-default thread">
+                    <div class="panel-heading">
+                        <h4>
+                            {{post.title}} <a href="mailto:{{post.email}}" ng-show="post.email">by {{post.email}}</a>
+                            <small>
+                                <i class="glyphicon glyphicon-time"></i> {{post.createdAt.epoch_time * 1000 | date:'dd.MM.yyyy HH:mm'}}
+                                <span class="pull-right">#{{post.id}}</span>
+                            </small>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row thread-content">
+                            <div class="col-sm-3" ng-show="post.image">
+                                <a href="http://localhost:8080/v1/{{post.image.url}}" target="_blank">
+                                    <img class="post-img img-rounded img-responsive" ng-src="http://localhost:8080/v1/{{post.image.url}}-thumb">
+                                </a>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="thread-body">{{post.body}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+/* Space out content a bit */
+
+body, html, .container-fluid {
+  height: 100%;
+}
+
+.board-title {
+    text-align: center;
+}
+
+.side-nav {
+    padding-top: 20px;
+    padding-right: 0;
+    padding-left: 0;
+    border-right: 1px solid darkcyan;
+    height: 100%;
+}
+
+.content {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.content > .row {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
+.side-nav > h3 {
+    padding-left: 15px;
+}
+
+.side-nav-list > li.active {
+    width: 100%;
+}
+
+.side-nav-list > li.active > a {
+    border-radius: 0;
+    background-color: darkcyan !important;
+}
+
+.side-nav-list > li > a {
+    color: darkcyan;
+}
+
+/* Thread */
+
+.thread {
+    border-color: darkcyan;
+    border-radius: 4px;
+}
+
+.thread-link {
+    color: darkcyan;
+}
+
+.thread-link:hover {
+    cursor: pointer;
+    color: #006666;
+}
+
+.thread-content {
+    padding-bottom: 15px;
+}
+
+.thread-body {
+    white-space: pre-line;
+}
+
+.post-img {
+    margin-right: auto;
+    margin-left: auto;
+    border: 2px solid darkcyan;
+    max-height: 300px;
+}

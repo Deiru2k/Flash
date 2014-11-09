@@ -1,0 +1,81 @@
+<h1 class="board-title"><a ui-sref="main.board({'board': board.id})">&lt</a> /{{board.id}}/ - {{board.description}}</h1>
+<h3 class="board-title"><small>Thread #{{thread}}</small></h3>
+<hr>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <form class="form-horizontal" role="form">
+            <h3 class="board-title">Reply to thread</h3>
+            <div class="form-group">
+                <label for="newThreadTitle" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" ng-model="reply.title" class="form-control" id="newThreadTitle" placeholder="Title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newThreadEmail" class="col-sm-2 control-label">E-Mail</label>
+                <div class="col-sm-10">
+                    <input type="email" ng-model="reply.email" class="form-control" id="newThreadEmail" placeholder="E-Mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newThreadBody" class="col-sm-2 control-label">Message</label>
+                <div class="col-sm-10">
+                    <textarea rows="4" ng-model="reply.body" class="form-control" id="newThreadBody" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newThreadImage" class="col-sm-2 control-label">Image</label>
+                <div class="col-sm-10">
+                    <input id="newThreadImage" type="file" ng-model="reply.image" base-sixty-four-input>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="replyToThread(reply)" type="button">Reply to thread</button>
+                        </span>
+                        <input type="password" ng-model="reply.password" placeholder="Thread password" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row" ng-repeat="post in posts | orderBy:'createdAt.epoch_time':false">
+    <div class="col-md-12">
+        <div class="panel panel-default thread">
+            <div class="panel-heading">
+                <h4>
+                    {{post.title}} <a href="mailto:{{post.email}}" ng-show="post.email">by {{post.email}}</a>
+                    <small>
+                        <i class="glyphicon glyphicon-time"></i> {{post.createdAt.epoch_time * 1000 | date:'dd.MM.yyyy HH:mm'}}
+                        <span class="pull-right">#{{post.id}}</span>
+                    </small>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="row thread-content">
+                    <div class="col-sm-3" ng-show="post.image">
+                        <a href="http://localhost:8080/v1/{{post.image.url}}" target="_blank">
+                            <img class="post-img img-rounded img-responsive" ng-src="http://localhost:8080/v1/{{post.image.url}}-thumb">
+                        </a>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="thread-body">{{post.body}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="deletePost(post)" type="button"><i class="glyphicon glyphicon-trash"></i></button>
+                                </span>
+                            <input type="password" ng-model="post.password" placeholder="Thread password" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
