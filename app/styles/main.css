@@ -21,7 +21,10 @@ body, html, .container-fluid {
     padding-left: 20px;
     padding-right: 20px;
     height: 100%;
-    overflow-y: scroll;
+}
+
+.mobile-desc {
+    display: inline !important;
 }
 
 .content > .row {
@@ -68,7 +71,7 @@ body, html, .container-fluid {
 }
 
 .thread-body {
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 .post-img {
