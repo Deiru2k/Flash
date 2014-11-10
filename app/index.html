@@ -21,6 +21,30 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <nav class="navbar navbar-default" role="navigation" ng-controller="BoardNavCtrl">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#boardnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Mikotoboard</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="boardnav">
+                <ul class="nav navbar-nav">
+                    <li tooltip="{{board.id}}" ng-repeat="board in boards | orderBy:'id'" ui-sref-active="active">
+                        <a ui-sref="main.board({'board': board.id})" class="hidden-xs">/{{board.id}}/</a>
+                        <a ui-sref="main.board({'board': board.id})" class="visible-xs">/{{board.id}}/ - {{board.description}}</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
     <div class="container-fluid" ui-view>
     </div>
 
